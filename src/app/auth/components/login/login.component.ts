@@ -7,8 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private authService: AuthService) { }
+  returnUrl: string;
+  constructor(private authService: AuthService,
+              private route: ActivatedRoute) { }
   userData: {
     'id': string,
     'email': string,
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   };
   ngOnInit() {
     this.profieView();
-    console.log(this.userData);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   profieView() {
    
