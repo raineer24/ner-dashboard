@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoreModule } from "./core/index";
 import { HttpModule } from "@angular/http";
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 //import { LoginComponent } from './auth/components/login/login.component';
 // Routes
 import { routes } from "./app.routes";
@@ -20,6 +21,9 @@ import "rxjs/add/observable/empty";
 import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/takeUntil";
 
+//modules
+import { StoreModule } from "@ngrx/store";
+import { reducers, metaReducers } from './app.reducers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,11 @@ import "rxjs/add/operator/takeUntil";
     BrowserModule,
     RouterModule.forRoot(routes),
     CoreModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, { metaReducers })
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
