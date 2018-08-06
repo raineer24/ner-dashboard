@@ -1,4 +1,6 @@
-import { authReducer } from './auth/reducers/auth.reducer';
+
+import { environment } from './../environments/environment';
+import * as fromAuth from './auth/reducers/auth.reducer';
 
 /**
  * combineReducers is another useful metareducer that takes a map of reducer
@@ -8,10 +10,9 @@ import { authReducer } from './auth/reducers/auth.reducer';
  *
  * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
  */
-import { combineReducers, ActionReducer } from '@ngrx/store';
+import { combineReducers, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 
-import { AppState } from './interfaces';
-
+import { AppState as State } from './interfaces';
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -28,3 +29,14 @@ import { compose } from '@ngrx/core/compose';
  * ensure that none of the reducers accidentally mutates the state.
  */
 import { storeFreeze } from 'ngrx-store-freeze';
+
+const reducers = {
+   
+    auth: fromAuth.reducer
+
+  
+};
+
+
+
+
