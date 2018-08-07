@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppState } from '../../../interfaces';
 import { Subscription } from 'rxjs/Subscription';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
       'username': values.email,
       'password': values.password
     };
-    
+    const keys = Object.keys(values);
+    this.loginSubs = this.authService.login(data).subscribe(data => {
+      const error = data.error;
+      const user = JSON.parse(localStorage.getItem('user'));
+      window.location.href = this.returnUrl;
+    });
   }
 
   initForm() {

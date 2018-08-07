@@ -87,6 +87,27 @@ export class HttpService extends Http {
     }
 
     /**
+  * Performs a request with `post` http method.
+  * @param url
+  * @param body
+  * @param options
+  * @returns {Observable<>}
+  */
+    post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
+        this.requestInterceptor();
+        return super.post(this.getFullUrl(url), body, this.requestOptions(options))
+            .catch(this.onCatch.bind(this))
+            .do((res: Response) => {
+                this.onSubscribeSuccess(res);
+            }, (error: any) => {
+                this.onSubscribeError(error);
+            })
+            .finally(() => {
+                this.onFinally();
+            });
+    }
+
+    /**
    * Request interceptor.
    */
     private requestInterceptor(): void {
