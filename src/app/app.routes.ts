@@ -6,6 +6,6 @@ export const routes: Routes = [
         path: 'auth',
         loadChildren: './auth/auth.module#AuthModule'
     },
-    { path: '**', redirectTo: '/auth/login', pathMatch: 'full' },
+    { path: '**', redirectTo: '/', pathMatch: 'full' },
     
 ];
