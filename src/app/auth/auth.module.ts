@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutes as routes } from './auth.routes';
 import { AuthComponent } from './auth.component';
 import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
+
 @NgModule({
     imports: [
         CommonModule,
