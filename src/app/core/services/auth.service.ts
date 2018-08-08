@@ -55,7 +55,7 @@ export class AuthService {
         if (data.message == 'Found') {
           // Setting token after login
           //this.setTokenInLocalStorage(data);
-          //this.store.dispatch(this.actions.loginSuccess());
+        this.store.dispatch(this.actions.loginSuccess());
         } else {
           data.error = true;
           this.http.loading.next({

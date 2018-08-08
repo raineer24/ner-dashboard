@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutes as routes } from './auth.routes';
-
+import { AuthComponent } from './auth.component';
+import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
 
 @NgModule({
     imports: [
@@ -14,8 +15,15 @@ import { AuthRoutes as routes } from './auth.routes';
         ReactiveFormsModule 
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        AuthComponent
     ],
+    exports: [
+        AuthComponent
+    ],
+    providers: [
+        CanActivateViaAuthGuard
+    ]
    
 })
 export class AuthModule { }

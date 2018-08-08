@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppState } from '../../../interfaces';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../environments/environment';
+import { getAuthStatus } from '../../reducers/selectors';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router, 
               private fb: FormBuilder,
-              private store: Store<AppState>) { }
+    private store: Store<AppState>) { this.redirectIfUserLoggedIn();}
   
   ngOnInit() {
     this.initForm();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/auth';
+   
+    console.log(window.location.href);
   }
 
   onSubmit() {
@@ -33,11 +36,29 @@ export class LoginComponent implements OnInit {
       'password': values.password
     };
     const keys = Object.keys(values);
-    this.loginSubs = this.authService.login(data).subscribe(data => {
-      const error = data.error;
-      const user = JSON.parse(localStorage.getItem('user'));
-      window.location.href = this.returnUrl;
-    });
+
+    if (this.signInForm.valid) {
+      this.loginSubs = this.authService.login(data).subscribe(data => {
+        if (data.message == 'Found') {
+          this.router.navigate(['/auth']);
+          console.log(window.location.href);
+          
+        }
+      });
+    } else {
+      keys.forEach(val => {
+        const ctrl = this.signInForm.controls[val];
+        if (!ctrl.valid) {
+          this.pushErrorFor(val, null);
+          ctrl.markAsTouched();
+        };
+      });
+    }
+    
+  }
+
+  private pushErrorFor(ctrl_name: string, msg: string) {
+    this.signInForm.controls[ctrl_name].setErrors({ 'msg': msg });
   }
 
   initForm() {
@@ -48,6 +69,14 @@ export class LoginComponent implements OnInit {
       'email': [email, Validators.required],
       'password': [password, Validators.required]
     });
+  }
+
+  redirectIfUserLoggedIn() {
+    this.store.select(getAuthStatus).subscribe(
+      data => {
+        if (data === true) { this.router.navigate([this.returnUrl]); }
+      }
+    );
   }
   
 }

@@ -5,6 +5,7 @@ import { CoreModule } from "./core/index";
 import { HttpModule } from "@angular/http";
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AuthModule } from "./auth/auth.module";
 //import { LoginComponent } from './auth/components/login/login.component';
 // Routes
 import { routes } from "./app.routes";
@@ -35,7 +36,8 @@ import { reducers, metaReducers } from './app.reducers';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(reducers, { metaReducers }),
+    AuthModule
     
   ],
   providers: [],
