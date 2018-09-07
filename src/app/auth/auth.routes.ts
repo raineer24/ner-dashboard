@@ -8,12 +8,7 @@ export const AuthRoutes = [
         path: 'auth',
         component: AuthComponent, children:
         [
-                {
-                    path: 'login',
-                    component: LoginComponent,
-                    canActivate: [CanActivateViaAuthGuard]
-                    
-                },
+               
                 { path: 'members', component: MembersComponent },
         ],
         canActivate: [CanActivateViaAuthGuard],

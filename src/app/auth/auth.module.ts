@@ -7,13 +7,15 @@ import { AuthRoutes as routes } from './auth.routes';
 import { AuthComponent } from './auth.component';
 import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
 import { MembersComponent } from './components/members/members.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
         FormsModule,
-        ReactiveFormsModule 
+        ReactiveFormsModule,
+        TableModule
     ],
     declarations: [
         LoginComponent,
