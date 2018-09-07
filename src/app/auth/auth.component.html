@@ -171,16 +171,17 @@ t">
     <nav class="s-sidebar__nav">
       <ul>
         <li>
-          <a class="s-sidebar__nav-link" href="#0">
+         
             <i class="fa fa-home"></i>
-            <em>Dashboard</em>
-          </a>
+            <em><a href="/auth">DASHBOARD</a></em>
+         
         </li>
         <li>
-          <a class="s-sidebar__nav-link" href="#0">
+         
             <i class="fa fa-user"></i>
-            <em>Members</em>
-          </a>
+            <em  routerLinkActive="active">
+            <a [routerLink]="['/auth/members']">Members</a></em>
+          
         </li>
         <li>
           <a class="s-sidebar__nav-link" href="#0">
@@ -195,5 +196,6 @@ t">
   <!-- Content -->
   <main class="s-layout__content">
     <h1>Full View, Please!</h1>
+    <router-outlet></router-outlet>
   </main>
 </div>
