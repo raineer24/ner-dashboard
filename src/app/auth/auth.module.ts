@@ -6,17 +6,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutes as routes } from './auth.routes';
 import { AuthComponent } from './auth.component';
 import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
+import { MembersComponent } from './components/members/members.component';
+import { TableModule } from 'primeng/table';
+import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
         FormsModule,
-        ReactiveFormsModule 
+        ReactiveFormsModule,
+        TableModule
     ],
     declarations: [
         LoginComponent,
-        AuthComponent
+        AuthComponent,
+        MembersComponent,
+        StaffmembersComponent
     ],
     exports: [
         AuthComponent
