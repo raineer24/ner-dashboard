@@ -8,6 +8,7 @@ import { AuthComponent } from './auth.component';
 import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
 import { MembersComponent } from './components/members/members.component';
 import { TableModule } from 'primeng/table';
+import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { TableModule } from 'primeng/table';
     declarations: [
         LoginComponent,
         AuthComponent,
-        MembersComponent
+        MembersComponent,
+        StaffmembersComponent
     ],
     exports: [
         AuthComponent
