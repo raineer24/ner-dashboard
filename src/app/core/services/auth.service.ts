@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../interfaces';
 import { AuthActions } from '../../auth/actions/auth.actions';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AuthService {
    
@@ -37,6 +38,20 @@ export class AuthService {
     // so that only the inner obs dies and not the effect Observable
     // otherwise no further login requests will be fired
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
+  }
+
+  /**
+ *
+ * @param void
+ * @returns any
+ *
+ * @memberof AuthService
+ */
+  getUserRole(): any {
+    const jwtHelper: JwtHelperService = new JwtHelperService();
+    const userData = JSON.parse(localStorage.getItem('selleruser'));
+    const tokenPayload = jwtHelper.decodeToken(userData.token);
+    return tokenPayload.role;
   }
 
   /**
