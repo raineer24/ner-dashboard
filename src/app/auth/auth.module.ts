@@ -9,7 +9,7 @@ import { CanActivateViaAuthGuard } from '../core/guards/auth.guard';
 import { MembersComponent } from './components/members/members.component';
 import { TableModule } from 'primeng/table';
 import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
-
+import { RoleGuardService } from '../core/guards/role.guard';
 @NgModule({
     imports: [
         CommonModule,
@@ -28,7 +28,8 @@ import { StaffmembersComponent } from './components/staffmembers/staffmembers.co
         AuthComponent
     ],
     providers: [
-        CanActivateViaAuthGuard
+        CanActivateViaAuthGuard,
+        RoleGuardService
     ]
    
 })

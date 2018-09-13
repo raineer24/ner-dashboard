@@ -14,10 +14,10 @@ export class RoleGuardService implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        //const jwtHelper: JwtHelperService = new JwtHelperService();
+        const jwtHelper: JwtHelperService = new JwtHelperService();
         const expectedRoles = route.data.expectedRole;
         const userData = JSON.parse(localStorage.getItem('selleruser'));
-        //const tokenPayload = jwtHelper.decodeToken(userData.token);
+        const tokenPayload = jwtHelper.decodeToken(userData.token);
 
         if (!this.authService.isAuthenticated() || !expectedRoles.includes(this.authService.getUserRole())) {
             this.router.navigate(['/admin/login']);
