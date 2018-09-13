@@ -55,6 +55,23 @@ export class AuthService {
   }
 
   /**
+  *
+  * @param void
+  * @returns boolean
+  *
+  * @memberof AuthService
+  */
+  isAuthenticated(): boolean {
+    const jwtHelper: JwtHelperService = new JwtHelperService();
+    const userData = JSON.parse(localStorage.getItem('selleruser'));
+    if (!userData) {
+      return false;
+    } else {
+      return !jwtHelper.isTokenExpired(userData.token);
+    }
+  }
+
+  /**
    *
    *
    * @param {any} data
@@ -71,6 +88,7 @@ export class AuthService {
           // Setting token after login
           //this.setTokenInLocalStorage(data);
         this.store.dispatch(this.actions.loginSuccess());
+          localStorage.setItem('selleruser', JSON.stringify(data));
         } else {
           data.error = true;
           this.http.loading.next({
