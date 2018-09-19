@@ -10,6 +10,9 @@ import { AuthService } from '../../../core/services/auth.service';
 export class MembersComponent implements OnInit {
   users: any;
   usersSub: Subscription;
+  userData: {
+    
+  }
 
   constructor(
     private authService: AuthService
