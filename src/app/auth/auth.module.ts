@@ -10,6 +10,7 @@ import { MembersComponent } from './components/members/members.component';
 import { TableModule } from 'primeng/table';
 import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
 import { RoleGuardService } from '../core/guards/role.guard';
+import { MemberViewComponent } from './components/members/member-view/member-view.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -22,7 +23,8 @@ import { RoleGuardService } from '../core/guards/role.guard';
         LoginComponent,
         AuthComponent,
         MembersComponent,
-        StaffmembersComponent
+        StaffmembersComponent,
+        MemberViewComponent
     ],
     exports: [
         AuthComponent
