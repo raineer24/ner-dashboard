@@ -12,18 +12,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MembersComponent implements OnInit {
   users: any;
+  userId: number;
   usersSub: Subscription;
   sub: any;
   activeUser: any;
-  userData: {
-    'id': string,
-    'email': string,
-    'lastName': string,
-    'firstName': string,
-    'gender': string,
-    'mobileNumber': string,
-    'birthdate': string,
-  };
+  // userData: {
+  //   'id': string,
+  //   'email': string,
+  //   'lastName': string,
+  //   'firstName': string,
+  //   'gender': string,
+  //   'mobileNumber': string,
+  //   'birthdate': string,
+  // };
 
   constructor(
     private authService: AuthService,
@@ -37,12 +38,9 @@ export class MembersComponent implements OnInit {
       console.log(users);
      
     });
-    this.activeUser = JSON.parse(localStorage.getItem('selleruser'));
-    this.sub = this.route.params.subscribe(params => {
-      console.log(params);
-      let id = Number.parseInt(params['id']);
-      this.authService.views(this.activeUser.id).subscribe(user => this.activeUser = user);
-    });
+    
+   
+   
   }
 
 }

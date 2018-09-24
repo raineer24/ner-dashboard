@@ -8,21 +8,19 @@ import { AuthService } from '../core/services/auth.service';
     styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-    ngOnInit() {
-        this.userData = JSON.parse(localStorage.getItem('selleruser'));
-    }
+   
     userData: any;
     isCollapsed: boolean = true;
     menuItems = [
         {
-            name: "Assemble Order",
-            routerLink: "/admin/members",
+            name: "Members",
+            routerLink: "/auth/members",
             type: 'main',
             rolesRequired: [1, 4, 9, 10],
         },
         {
-            name: "Orders",
-            routerLink: "/admin/staffmembers",
+            name: "Staffmembers",
+            routerLink: "/auth/staffmembers",
             type: 'main',
             rolesRequired: [1, 2, 4, 5, 6, 8, 11, 12, 13],
         },
@@ -32,6 +30,9 @@ export class AuthComponent implements OnInit {
         private authService: AuthService,
         private router: Router
     ) {
+    }
+    ngOnInit() {
+        this.userData = JSON.parse(localStorage.getItem('selleruser'));
     }
     getMenu() {
         const userRole = this.authService.getUserRole();

@@ -141,28 +141,18 @@ export class AuthService {
    */
   views(id): Observable<any> {
     return this.http.get(
-      `v1/useraccount/account/{id}/view`
+      `v1/useraccount/account/${id}/view`
     ).map((res: Response) => {
-      let data = res.json();
-     
-      if (data.message == 'Found') {
-        this.setTokenInLocalStorage(res.json());
-        
-      } else {
-        data.error = true;
-        // this.http.loading.next({
-        //   loading: false,
-        //   hasError: true,
-        //   hasMsg: 'Please enter valid Credentials'
-        // });
-      }
-      return data;
-    });
+      const response = res.json();
+      return response;
+    })
+      .catch(res => Observable.empty());
+    }
     // catch should be handled here with the http observable
     // so that only the inner obs dies and not the effect Observable
     // otherwise no further login requests will be fired
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
-  }
+  
 
   /**
    *
