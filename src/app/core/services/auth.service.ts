@@ -128,5 +128,43 @@ export class AuthService {
     // otherwise no further login requests will be fired
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
+
+   
+
+  /**
+   *
+   *
+   * @param {any} data
+   * @returns {Observable<any>}
+   *
+   * @memberof AuthService
+   */
+  views(id): Observable<any> {
+    return this.http.get(
+      `v1/useraccount/account/${id}/view`
+    ).map((res: Response) => {
+      const response = res.json();
+      return response;
+    })
+      .catch(res => Observable.empty());
+    }
+    // catch should be handled here with the http observable
+    // so that only the inner obs dies and not the effect Observable
+    // otherwise no further login requests will be fired
+    // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
+  
+
+  /**
+   *
+   *
+   * @private
+   * @param {any} user_data
+   *
+   * @memberof AuthService
+   */
+  private setTokenInLocalStorage(user_data): void {
+    const jsonData = JSON.stringify(user_data);
+    localStorage.setItem('selleruser', jsonData);
+  }
   
 }

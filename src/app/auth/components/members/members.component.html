@@ -12,7 +12,12 @@
 <tr >
 
 
-      <td>{{user.firstName}}</td>
+<td>
+<a [routerLink]="['/auth/members/view/', user.id]">{{user.firstName}}</a>
+
+
+</td>
+
 <td>{{user.lastName}}</td>
 <td>{{user.lastLogin}}</td>
 

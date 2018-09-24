@@ -18,9 +18,11 @@ export class RoleGuardService implements CanActivate {
         const expectedRoles = route.data.expectedRole;
         const userData = JSON.parse(localStorage.getItem('selleruser'));
         const tokenPayload = jwtHelper.decodeToken(userData.token);
+        console.log(tokenPayload);
+        console.log(userData.token);
 
         if (!this.authService.isAuthenticated() || !expectedRoles.includes(this.authService.getUserRole())) {
-            this.router.navigate(['/admin/login']);
+            this.router.navigate(['/auth/login']);
             return false;
         }
         return true;

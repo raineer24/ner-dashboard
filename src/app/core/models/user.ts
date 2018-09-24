@@ -6,5 +6,7 @@ export class User {
     bill_address_id: string;
     ship_address_id: string;
     payment_sources: [any];
+    //bill_address: [Address];
+   // ship_address: [Address];
    
 }
