@@ -1,10 +1,13 @@
 <h1>test</h1>
-<ul *ngIf="sub">
+<ul *ngIf="userData">
   <li>
-      {{sub.firstName}}
-       {{sub.lastName}}
+      {{userData.firstName}}
+       {{userData.lastName}}
   </li>
   <li>
-    {{sub.email}}
+    {{userData.email}}
+  </li>
+  <li>
+    {{userData.birthdate}}
   </li>
 </ul>

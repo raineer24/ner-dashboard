@@ -11,6 +11,15 @@ export class MemberViewComponent implements OnInit {
   routeSubscription$: Subscription;
   sub: any;
   activeUser: any[];
+  userData: {
+    'id': string,
+    'email': string,
+    'lastName': string,
+    'firstName': string,
+    'gender': string,
+    'mobileNumber': string,
+    'birthdate': string,
+  }
   constructor(private authService: AuthService,
     private route: ActivatedRoute) {
     
@@ -26,14 +35,19 @@ export class MemberViewComponent implements OnInit {
       (params: any) => {
         const memberId = params['id'];
         this.authService.views(memberId).subscribe(sub => {
-          this.sub = sub;
-          console.log(this.sub);
+          this.userData = sub;
+          console.log(this.userData);
+          this.userData.birthdate = sub.birthdate ? this.formatDate(sub.birthdate): sub.birthdate;
         }
           
         )
       }
     );
     
+  }
+
+  private formatDate(date: string) {
+    return new Date(date).toLocaleDateString('en-US', { month:'long', day:'numeric', year: 'numeric' });
   }
 
 }
