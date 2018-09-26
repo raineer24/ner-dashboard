@@ -23,7 +23,14 @@ export class MembersAddEditComponent implements OnInit {
 
   initForm(): void {
     this.addEditMemberForm = this.fb.group({
-      username: ['', Validators.required]
+      username: ['', Validators.required],
+      name: ['', Validators.required],
+      lastname: ['', Validators.required]
     })
+  }
+
+  onSubmit(option?: string): void {
+    const values = this.addEditMemberForm.value;
+    console.log(values);
   }
 }

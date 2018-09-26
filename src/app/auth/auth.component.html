@@ -1,28 +1,21 @@
-<div>
-  <!-- Sidebar -->
-  <div class="s-layout__sidebar">
-    <a class="s-sidebar__trigger" href="#0">
-      <i class="fa fa-bars"></i>
-    </a>
-
-    <nav class="s-sidebar__nav">
-      <ul>
-<li *ngFor="let menuItem of getMenu()" routerLinkActive="active">
-
+<div class="dashboard">
+    <ul>
+      <li *ngFor="let menuItem of getMenu()" routerLinkActive="active">
+    
         <span *ngIf="menuItem.type == 'main'" [routerLink]=menuItem.routerLink>{{menuItem.name}}</span>
         <ng-template #elseBlock1>
           <a *ngIf="menuItem.type == 'submenu'; else elseBlock2" [routerLink]=menuItem.routerLink>
             <small>{{menuItem.name}}</small>
           </a>
         </ng-template>
-</li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Content -->
-  <main class="s-layout__content">
+      </li>
+    </ul>
     
+  <div class="container">
     <router-outlet></router-outlet>
-  </main>
+  </div>  
+    
 </div>
+
+
+

@@ -1,4 +1,8 @@
-<form class="form-inline small" [formGroup]="addEditMemberForm">
+
+<form [formGroup]="addEditMemberForm">
+  <div class="row">
+    <button (click)="onSubmit('Add1')">Save and create new user</button>
+  </div>
   <div class="row">
     <div class="col-sm-12">
       <label for="username">Username:</label>
@@ -11,4 +15,11 @@
       <input type="text" formControlName="name" class="form-control" placeholder="Name">
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="username">Last Name:</label>
+      <input type="text" formControlName="lastname" class="form-control" placeholder="Last Name">
+    </div>
+  </div>
 </form>
+

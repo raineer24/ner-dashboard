@@ -1,30 +1,32 @@
+<div>
 <p-table [value]="users">
   <ng-template pTemplate="header">
     <tr>
       <th>Name</th>
       <th>Last Name</th>
       <th>Last Login</th>
-     
+
     </tr>
   </ng-template>
-<ng-template pTemplate="body" let-user >
+  <ng-template pTemplate="body" let-user>
 
-<tr >
-
-
-<td>
-<a [routerLink]="['/auth/members/view/', user.id]">{{user.firstName}}</a>
+    <tr>
 
 
-</td>
-
-<td>{{user.lastName}}</td>
-<td>{{user.lastLogin}}</td>
+      <td>
+        <a [routerLink]="['/auth/members/view/', user.id]">{{user.firstName}}</a>
 
 
+      </td>
 
-     
+      <td>{{user.lastName}}</td>
+      <td>{{user.lastLogin}}</td>
+
+
+
+
     </tr>
   </ng-template>
 </p-table>
 <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/auth/members/add/member']">Add New User</button>
+</div>
