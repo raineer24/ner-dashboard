@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
 import { RoleGuardService } from '../core/guards/role.guard';
 import { MemberViewComponent } from './components/members/member-view/member-view.component';
+import { MembersAddEditComponent } from './components/members/members-add-edit/members-add-edit.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -24,7 +25,8 @@ import { MemberViewComponent } from './components/members/member-view/member-vie
         AuthComponent,
         MembersComponent,
         StaffmembersComponent,
-        MemberViewComponent
+        MemberViewComponent,
+        MembersAddEditComponent
     ],
     exports: [
         AuthComponent

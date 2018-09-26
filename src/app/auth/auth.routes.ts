@@ -6,6 +6,7 @@ import { RoleGuardService } from '../core/guards/role.guard';
 import { MembersComponent } from './components/members/members.component';
 import { StaffmembersComponent } from './components/staffmembers/staffmembers.component';
 import { MemberViewComponent } from '../auth/components/members/member-view/member-view.component';
+import { MembersAddEditComponent } from './components/members/members-add-edit/members-add-edit.component';
 export const AuthRoutes = [
     { path: 'auth/login', component: LoginComponent },
     {
@@ -29,7 +30,13 @@ export const AuthRoutes = [
                     data: {
                         expectedRole: [1, 2, 4, 5, 6, 8, 11, 12, 13]
                     }
-                }   
+                }, 
+                 {
+                     path: 'members/add/member', component: MembersAddEditComponent, canActivate: [RoleGuardService],
+                    data: {
+                        expectedRole: [1, 2, 4, 5, 6, 8, 11, 12, 13]
+                    }
+                }    
         ],
         canActivate: [CanActivateViaAuthGuard],
     }
