@@ -23,9 +23,14 @@ export class MembersAddEditComponent implements OnInit {
 
   initForm(): void {
     this.addEditMemberForm = this.fb.group({
-      username: ['', Validators.required],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required]
+      'firstName': ['', Validators.required],
+      'lastName': ['', Validators.required],
+      'mobile': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]{10}')])],
+      'gender': ['', Validators.required],
+      'prefix': ['+63', Validators.required],
+      'month': ['', Validators.required],
+      'day': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{1,2}')])],
+      'year': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{4}')])],
     })
   }
 
