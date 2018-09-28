@@ -104,6 +104,18 @@ export class AuthService {
     // otherwise no further login requests will be fired
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
+
+   /**
+    *
+    * @param {void}
+    * @returns {Observable<any>}
+    *
+    * @memberof AuthService
+    */
+  getRolesList(): Observable<any> {
+    return this.http.get('v1/useraccount/roles')
+      .map((res: Response) => res.json());
+  }
   
 
    /**

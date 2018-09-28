@@ -1,12 +1,26 @@
 
 <form [formGroup]="addEditMemberForm">
   <div class="row">
-    <button (click)="onSubmit('Add1')">Save and create new user</button>
+    <div class="col-sm-12">
+      <ng-container *ngIf="operation === 'Add'">
+<button (click)="onSubmit('Add1')">Save and create new user</button>
+
+      </ng-container>
+      
+    </div>
+   
   </div>
   <div class="row">
     <div class="col-sm-12">
       <label for="firstName">First Name:</label>
       <input type="text" formControlName="firstName" class="form-control" placeholder="Name">
+<div *ngIf="addEditMemberForm.get('firstName').errors && addEditMemberForm.get('firstName').touched">
+
+
+        <span class="fa fa-registered">!</span>
+      <p>{{addEditMemberForm.get('firstName').errors.msg || 'Please enter your first name'}}</p>
+
+      </div>
     </div>
   </div>
   <div class="row">
