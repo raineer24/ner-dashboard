@@ -104,6 +104,54 @@ export class AuthService {
     // otherwise no further login requests will be fired
     // MORE INFO https://youtu.be/3LKMwkuK0ZE?t=24m29s
   }
+
+   /**
+    *
+    * @param {void}
+    * @returns {Observable<any>}
+    *
+    * @memberof AuthService
+    */
+  getRolesList(): Observable<any> {
+    return this.http.get('v1/useraccount/roles')
+      .map((res: Response) => res.json());
+  }
+
+   /**
+   *
+   *
+   * @param {any} data
+   * @returns {Observable<any>}
+   *
+   * @memberof AuthService
+   */
+  register(data): Observable<any> {
+    return this.http.post('v1/useraccount/account/save', data)
+    .map((res: Response) => {
+      let response = res.json();
+      if (response.message == 'Saved') {
+        const d = Date.now();
+        this.setTokenInLocalStorage({
+          id: response.id,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          mobileNumber: data.mobileNumber,
+          gender: data.gender,
+          email: data.username,
+          username: data.username,
+          dateCreated: d,
+          dateUpdated: d,
+          dateAuthorized: d,
+          dateTime: d,
+        });
+        this.store.dispatch(this.actions.loginSuccess());
+      }
+      else {
+        console.log('error register');
+      }
+      return response;
+    });
+  }
   
 
    /**

@@ -1,14 +1,40 @@
-<form class="form-inline small" [formGroup]="addEditMemberForm">
+
+<form [formGroup]="addEditMemberForm">
   <div class="row">
     <div class="col-sm-12">
-      <label for="username">Username:</label>
-      <input type="text" formControlName="username" class="form-control" placeholder="Username">
+      <ng-container *ngIf="operation === 'Add'">
+<button (click)="onSubmit('Add1')">Save and create new user</button>
+
+      </ng-container>
+      
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" class="form-control" placeholder="Name">
+<div *ngIf="addEditMemberForm.get('firstName').errors && addEditMemberForm.get('firstName').touched">
+
+
+        <span class="alert alert-danger">!</span>
+      <p>{{addEditMemberForm.get('firstName').errors.msg || 'Please enter your first name'}}</p>
+
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <label for="username">Name:</label>
-      <input type="text" formControlName="name" class="form-control" placeholder="Name">
+      <label for="lastName">Last Name:</label>
+      <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
     </div>
   </div>
+<div class="row">
+  <div class="col-sm-12">
+    <label for="email">Email:</label>
+    <input type="text" formControlName="email" class="form-control" placeholder="Email">
+  </div>
+</div>
+
 </form>
+
