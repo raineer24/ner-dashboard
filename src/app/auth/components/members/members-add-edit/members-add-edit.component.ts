@@ -35,31 +35,51 @@ export class MembersAddEditComponent implements OnInit {
           }
           else {
             this.operation = 'Add';
+           
           }
        });
       }
     );
   }
+  ngOnDestroy() {
+    this.routeSubscription$.unsubscribe();
+  }
 
   initForm(): void {
     this.addEditMemberForm = this.fb.group({
+      'email': ['', Validators.compose([Validators.required, Validators.email])],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
-      'mobile': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]{10}')])],
-      'gender': ['', Validators.required],
-      'prefix': ['+63', Validators.required],
-      'month': ['', Validators.required],
-      'day': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{1,2}')])],
-      'year': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{4}')])],
+      
     })
   }
 
   onSubmit(option?: string): void {
     const values = this.addEditMemberForm.value;
-
+    
     if (this.addEditMemberForm.valid) {
-      if(this.operation)
-      console.log(values);
+      if(this.operation == 'Add' ) {
+        const data = {
+          'lastName': values.lastName,
+          'firstName': values.firstName,
+          'email': values.email,
+        }
+        this.authService.register(data).subscribe(response => {
+          if (response.message == 'Saved') {
+            console.log(response.message);
+            if (option === 'Add') {
+              console.log('add');
+            } else {
+              this.initForm();
+            }
+          }
+        });
+      } else {
+        console.log('edit');
+      }
+      
+    } else {
+      console.log('error. not saving');
     }
 
     

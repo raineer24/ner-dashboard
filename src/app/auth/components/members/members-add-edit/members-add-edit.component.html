@@ -17,7 +17,7 @@
 <div *ngIf="addEditMemberForm.get('firstName').errors && addEditMemberForm.get('firstName').touched">
 
 
-        <span class="fa fa-registered">!</span>
+        <span class="alert alert-danger">!</span>
       <p>{{addEditMemberForm.get('firstName').errors.msg || 'Please enter your first name'}}</p>
 
       </div>
@@ -29,5 +29,12 @@
       <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
     </div>
   </div>
+<div class="row">
+  <div class="col-sm-12">
+    <label for="email">Email:</label>
+    <input type="text" formControlName="email" class="form-control" placeholder="Email">
+  </div>
+</div>
+
 </form>
 
