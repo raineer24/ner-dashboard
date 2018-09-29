@@ -25,17 +25,24 @@ export class MembersAddEditComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.activeUser = JSON.parse(localStorage.getItem('selleruser'));
+    console.log(this.activeUser.role_id);
     this.routeSubscription$ = this.route.params.subscribe(
       (params: any) => {
         this.authService.getRolesList().subscribe((roleList) => {
           console.log(roleList);
-
+          switch  (this.activeUser.role_id) {
+            case 1: //EosDev
+              this.rolesList = roleList
+              break;
+          }
           if (params.id) {
             this.operation ='Edit';
           }
           else {
             this.operation = 'Add';
-           
+            this.addEditMemberForm.patchValue({
+              role: 0,
+            });
           }
        });
       }
@@ -79,6 +86,8 @@ export class MembersAddEditComponent implements OnInit {
       }
       
     } else {
+      const keys = Object.keys(values);
+      console.log(keys);
       console.log('error. not saving');
     }
 
