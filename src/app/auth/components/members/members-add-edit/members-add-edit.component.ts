@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../../../core/services/auth.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-members-add-edit',
   templateUrl: './members-add-edit.component.html',
@@ -25,17 +26,25 @@ export class MembersAddEditComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.activeUser = JSON.parse(localStorage.getItem('selleruser'));
+    console.log(this.activeUser.role_id);
+   
     this.routeSubscription$ = this.route.params.subscribe(
       (params: any) => {
         this.authService.getRolesList().subscribe((roleList) => {
           console.log(roleList);
-
+          switch  (this.activeUser.role_id) {
+            case 1: //EosDev
+              this.rolesList = roleList
+              break;
+          }
           if (params.id) {
             this.operation ='Edit';
           }
           else {
             this.operation = 'Add';
-           
+            this.addEditMemberForm.patchValue({
+              role: 0,
+            });
           }
        });
       }
@@ -50,7 +59,9 @@ export class MembersAddEditComponent implements OnInit {
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
-      
+      'month': ['', Validators.required],
+      'day': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{1,2}')])],
+      'year': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{4}')])],
     })
   }
 
@@ -63,6 +74,7 @@ export class MembersAddEditComponent implements OnInit {
           'lastName': values.lastName,
           'firstName': values.firstName,
           'email': values.email,
+          'birthdate': new Date(`${values.year}-${values.month}-${values.day}`).getTime(),
         }
         this.authService.register(data).subscribe(response => {
           if (response.message == 'Saved') {
@@ -79,6 +91,8 @@ export class MembersAddEditComponent implements OnInit {
       }
       
     } else {
+      const keys = Object.keys(values);
+      console.log(keys);
       console.log('error. not saving');
     }
 

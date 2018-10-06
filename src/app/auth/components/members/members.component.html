@@ -4,8 +4,8 @@
     <tr>
       <th>Name</th>
       <th>Last Name</th>
-      <th>Last Login</th>
-
+      <th>Date Joined</th>
+      <th>Date Renewal</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
@@ -20,7 +20,8 @@
       </td>
 
       <td>{{user.lastName}}</td>
-      <td>{{user.lastLogin}}</td>
+      <td>{{user.dateCreated | date }}</td>
+      <td>{{user.dateExpired | date }}</td>
 
 
 
