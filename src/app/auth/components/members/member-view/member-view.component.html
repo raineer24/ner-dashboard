@@ -8,6 +8,13 @@
     {{userData.email}}
   </li>
   <li>
-    {{userData.birthdate}}
+    {{userData.birthdate | date }}
   </li>
+<li>
+  {{userData.dateCreated | date }}
+</li>
+<li>
+  {{userData.dateExpired | date }}
+</li>
+
 </ul>
